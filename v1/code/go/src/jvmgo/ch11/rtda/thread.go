@@ -10,6 +10,7 @@ JVM
       Frame
         LocalVars
         OperandStack
+* 程序计数器、一个囊括帧的栈
 */
 type Thread struct {
 	pc    int // the address of the instruction currently being executed
@@ -17,6 +18,9 @@ type Thread struct {
 	// todo
 }
 
+/**
+ * 新建一个线程
+ */
 func NewThread() *Thread {
 	return &Thread{
 		stack: newStack(1024),

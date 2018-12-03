@@ -5,11 +5,18 @@ import "jvmgo/ch11/classfile"
 
 type Constant interface{}
 
+/**
+ * 常量池
+ */
 type ConstantPool struct {
 	class  *Class
 	consts []Constant
 }
 
+/**
+ * @param class Class
+ * @param cfCp []ConstantInfo
+ */
 func newConstantPool(class *Class, cfCp classfile.ConstantPool) *ConstantPool {
 	cpCount := len(cfCp)
 	consts := make([]Constant, cpCount)
@@ -17,6 +24,7 @@ func newConstantPool(class *Class, cfCp classfile.ConstantPool) *ConstantPool {
 
 	for i := 1; i < cpCount; i++ {
 		cpInfo := cfCp[i]
+		// 判断cpInfo的类型
 		switch cpInfo.(type) {
 		case *classfile.ConstantIntegerInfo:
 			intInfo := cpInfo.(*classfile.ConstantIntegerInfo)

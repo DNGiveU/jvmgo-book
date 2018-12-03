@@ -168,6 +168,9 @@ func (self *Class) isJioSerializable() bool {
 	return self.name == "java/io/Serializable"
 }
 
+/**
+ * 构造一个对象实例 { Class, []Slot }
+ */
 func (self *Class) NewObject() *Object {
 	return newObject(self)
 }

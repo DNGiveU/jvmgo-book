@@ -17,6 +17,9 @@ type ClassLoader struct {
 	classMap    map[string]*Class // loaded classes
 }
 
+/**
+ * 实例化类加载器，并加载基本类（java.lang.Class）、原始类型
+ */
 func NewClassLoader(cp *classpath.Classpath, verboseFlag bool) *ClassLoader {
 	loader := &ClassLoader{
 		cp:          cp,

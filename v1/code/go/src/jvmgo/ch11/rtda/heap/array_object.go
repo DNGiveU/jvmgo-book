@@ -22,6 +22,7 @@ func (self *Object) Doubles() []float64 {
 	return self.data.([]float64)
 }
 func (self *Object) Refs() []*Object {
+	// 类型转换
 	return self.data.([]*Object)
 }
 

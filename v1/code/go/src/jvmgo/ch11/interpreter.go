@@ -5,7 +5,11 @@ import "jvmgo/ch11/instructions"
 import "jvmgo/ch11/instructions/base"
 import "jvmgo/ch11/rtda"
 
+/**
+ * 执行线程里面的帧
+ */
 func interpret(thread *rtda.Thread, logInst bool) {
+	// 捕获线程中的异常
 	defer catchErr(thread)
 	loop(thread, logInst)
 }
@@ -26,6 +30,7 @@ func loop(thread *rtda.Thread, logInst bool) {
 
 		// decode
 		reader.Reset(frame.Method().Code(), pc)
+		// 读取操作码
 		opcode := reader.ReadUint8()
 		inst := instructions.NewInstruction(opcode)
 		inst.FetchOperands(reader)

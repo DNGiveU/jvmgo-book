@@ -1,8 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"jvmgo/ch11/classpath"
+)
 import "strings"
-import "jvmgo/ch11/classpath"
 import "jvmgo/ch11/instructions/base"
 import "jvmgo/ch11/rtda"
 import "jvmgo/ch11/rtda/heap"
@@ -13,6 +15,9 @@ type JVM struct {
 	mainThread  *rtda.Thread
 }
 
+/**
+ * 初始化一个jvm={命令行输入参数、类加载器、主线程}
+ */
 func newJVM(cmd *Cmd) *JVM {
 	cp := classpath.Parse(cmd.XjreOption, cmd.cpOption)
 	classLoader := heap.NewClassLoader(cp, cmd.verboseClassFlag)
@@ -23,6 +28,9 @@ func newJVM(cmd *Cmd) *JVM {
 	}
 }
 
+/**
+ * 启动一个jvm
+ */
 func (self *JVM) start() {
 	self.initVM()
 	self.execMain()

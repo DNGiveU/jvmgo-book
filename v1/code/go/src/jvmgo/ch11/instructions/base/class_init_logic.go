@@ -6,7 +6,9 @@ import "jvmgo/ch11/rtda/heap"
 // jvms 5.5
 func InitClass(thread *rtda.Thread, class *heap.Class) {
 	class.StartInit()
+	// 调用 <clinit> 方法
 	scheduleClinit(thread, class)
+	// 初始化父类
 	initSuperClass(thread, class)
 }
 
@@ -22,6 +24,7 @@ func scheduleClinit(thread *rtda.Thread, class *heap.Class) {
 func initSuperClass(thread *rtda.Thread, class *heap.Class) {
 	if !class.IsInterface() {
 		superClass := class.SuperClass()
+		// 父类初始化了，就不再初始化
 		if superClass != nil && !superClass.InitStarted() {
 			InitClass(thread, superClass)
 		}

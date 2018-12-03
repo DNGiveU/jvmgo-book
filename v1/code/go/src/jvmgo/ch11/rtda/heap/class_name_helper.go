@@ -12,9 +12,9 @@ var primitiveTypes = map[string]string{
 	"double":  "D",
 }
 
-// [XXX -> [[XXX
-// int -> [I
-// XXX -> [LXXX;
+// [XXX -> [[XXX	数组
+// int -> [I		原始类型
+// XXX -> [LXXX;	引用对象
 func getArrayClassName(className string) string {
 	return "[" + toDescriptor(className)
 }

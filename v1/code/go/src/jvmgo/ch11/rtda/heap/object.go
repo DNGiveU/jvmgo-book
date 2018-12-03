@@ -1,15 +1,19 @@
 package heap
 
+/**
+ * 保留字节码数据、对象信息
+ */
 type Object struct {
 	class *Class
 	data  interface{} // Slots for Object, []int32 for int[] ...
-	extra interface{}
+	extra interface{} // 一般是 Class
 }
 
 // create normal (non-array) object
 func newObject(class *Class) *Object {
 	return &Object{
 		class: class,
+		// []Slot = [] { num, *Object }
 		data:  newSlots(class.instanceSlotCount),
 	}
 }
